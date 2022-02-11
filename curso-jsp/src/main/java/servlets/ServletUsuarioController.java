@@ -1,20 +1,29 @@
 package servlets;
 
 import java.io.IOException;
+
 import java.util.List;
+
+import org.apache.tomcat.jakartaee.commons.compress.utils.IOUtils;
+import org.apache.tomcat.util.codec.binary.Base64;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import dao.DAOUsuarioRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 //import jakarta.servlet.annotation.WebServlet;//bug
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
 import model.ModelLogin;
 //Mapeamento, parte url que vem no navegador...
 //@WebServlet(urlPatterns={"/ServletUsuarioController","/principal/usuario.jsp"})//bug
+
+@MultipartConfig
 public class ServletUsuarioController extends ServletGenericUtil {
 	private static final long serialVersionUID = 1L;
 
@@ -94,7 +103,9 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			String email = request.getParameter("email");
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
-
+			String perfil= request.getParameter("perfil");
+			String sexo= request.getParameter("sexo");
+			
 			ModelLogin modelLogin = new ModelLogin();
 
 			modelLogin.setId(id != null && !id.isEmpty() ? Long.parseLong(id) : null);//parseLong(tava String), se existe um número, se sim, se nao...a servlet recebe os parametros por String
@@ -102,7 +113,19 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			modelLogin.setEmail(email);
 			modelLogin.setLogin(login);
 			modelLogin.setSenha(senha);
+			modelLogin.setPerfil(perfil);
+			modelLogin.setSexo(sexo);
 
+			//Foto
+			if(ServletFileUpload.isMultipartContent(request)) {
+				Part part=request.getPart("fileFoto"); //pega foto da tela
+				byte[] foto=IOUtils.toByteArray(part.getInputStream()); //converte a imagem para bytes
+				String imagemBase64="data:image/"+part.getContentType().split("\\/")[1]+";base64,"+new Base64().encodeBase64String(foto); //String gigante
+				
+				modelLogin.setFotoUser(imagemBase64);
+				modelLogin.setextensaofotouser(part.getContentType().split("\\/")[1]);//
+			}
+			
 			if (daoUsuarioRepository.validarLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {
 				msg = "Já existe usuário com o mesmo login, informe outro login";
 			} else {
