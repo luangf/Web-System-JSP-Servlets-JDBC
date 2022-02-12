@@ -53,6 +53,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				String idUser = request.getParameter("id");
 				daoUsuarioRepository.deletarUser(idUser);
 				response.getWriter().write("Excluído com sucesso!");//resposta usada trabalhando com ajax
+				
 			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarUserAjax")) {//?acao=buscarUserAjax
 				String nomeBusca = request.getParameter("nomeBusca");
 				List<ModelLogin> dadosJsonUser=daoUsuarioRepository.consultaUsuarioList(nomeBusca, super.getUserLogado(request));
@@ -61,6 +62,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				String json=mapper.writeValueAsString(dadosJsonUser);
 				
 				response.getWriter().write(json);
+				
 			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarEditar")) {//?acao=buscarEditar
 				String id=request.getParameter("id");
 				ModelLogin modelLogin=daoUsuarioRepository.consultaUsuarioId(id, super.getUserLogado(request));
@@ -71,12 +73,22 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				request.setAttribute("msg", "Usuário em edição");
 				request.setAttribute("modelLogin", modelLogin);
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				
 			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("listarUser")) {//?acao=listarUser
 				List<ModelLogin> modelLogins=daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
 				
 				request.setAttribute("msg", "Usuários carregados");
 				request.setAttribute("modelLogins", modelLogins);
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				
+			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("downloadFoto")) {
+				String idUser=request.getParameter("id");
+				ModelLogin modelLogin=daoUsuarioRepository.consultaUsuarioId(idUser, super.getUserLogado(request));
+				if(modelLogin.getFotoUser() != null && !modelLogin.getFotoUser().isEmpty()) {
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo."+modelLogin.getextensaofotouser());
+					response.getOutputStream().write(new Base64().decodeBase64(modelLogin.getFotoUser().split("\\,")[1]));
+				}
+				
 			}else {
 				List<ModelLogin> modelLogins=daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
 				request.setAttribute("modelLogins", modelLogins);
@@ -119,11 +131,13 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			//Foto
 			if(ServletFileUpload.isMultipartContent(request)) {
 				Part part=request.getPart("fileFoto"); //pega foto da tela
-				byte[] foto=IOUtils.toByteArray(part.getInputStream()); //converte a imagem para bytes
-				String imagemBase64="data:image/"+part.getContentType().split("\\/")[1]+";base64,"+new Base64().encodeBase64String(foto); //String gigante
-				
-				modelLogin.setFotoUser(imagemBase64);
-				modelLogin.setextensaofotouser(part.getContentType().split("\\/")[1]);//
+				if(part.getSize()>0) {
+					byte[] foto=IOUtils.toByteArray(part.getInputStream()); //converte a imagem para bytes
+					String imagemBase64="data:image/"+part.getContentType().split("\\/")[1]+";base64,"+new Base64().encodeBase64String(foto); //String gigante
+					
+					modelLogin.setFotoUser(imagemBase64);
+					modelLogin.setextensaofotouser(part.getContentType().split("\\/")[1]);//
+				}
 			}
 			
 			if (daoUsuarioRepository.validarLogin(modelLogin.getLogin()) && modelLogin.getId() == null) {

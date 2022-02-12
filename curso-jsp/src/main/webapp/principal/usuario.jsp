@@ -58,10 +58,12 @@
 															<div class="form-group form-default input-group mb-4">
 														    	<div class="input-group-prepend">
 														    		<c:if test="${modelLogin.fotoUser != '' && modelLogin.fotoUser != null}">
-														    			<img alt="Imagem User" src="${modelLogin.fotoUser}" id="fotoembase64" width="70px">
+														    			<a href="<%=request.getContextPath()%>/ServletUsuarioController?acao=downloadFoto&id=${modelLogin.id}"> <!--href sempre dispara um GET-->
+														    				<img alt="Imagem User" id="fotoembase64" src="${modelLogin.fotoUser}" width="70px">
+														    			</a>
 														    		</c:if>
 														    		<c:if test="${modelLogin.fotoUser == '' || modelLogin.fotoUser == null}">
-														    			<img alt="Imagem User" src="assets/images/user.png" width="70px">
+														    			<img alt="Imagem User" id="fotoembase64" src="assets/images/user.png" width="70px">
 														    		</c:if>
 														    	</div>
 														    	<input type="file" id="fileFoto" name="fileFoto" accept="image/*" onchange="visualizarImg('fotoembase64','fileFoto');" class="form-control-file" style="margin-top:15px; margin-left:5px;">
