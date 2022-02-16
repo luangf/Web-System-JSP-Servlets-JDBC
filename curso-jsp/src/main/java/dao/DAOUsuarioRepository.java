@@ -21,7 +21,7 @@ public class DAOUsuarioRepository {
 	public ModelLogin gravarUsuario(ModelLogin objeto, Long userLogado) throws Exception {
 		if (objeto.isNovo()) { // grava novo usuario
 
-			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo) VALUES (?, ?, ?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo, cep, logradouro, bairro, localidade, uf, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			PreparedStatement preparedSql = connection.prepareStatement(sql);
 
 			preparedSql.setString(1, objeto.getLogin());
@@ -31,6 +31,13 @@ public class DAOUsuarioRepository {
 			preparedSql.setLong(5, userLogado);
 			preparedSql.setString(6, objeto.getPerfil());
 			preparedSql.setString(7, objeto.getSexo());
+			
+			preparedSql.setString(8, objeto.getCep());
+			preparedSql.setString(9, objeto.getLogradouro());
+			preparedSql.setString(10, objeto.getBairro());
+			preparedSql.setString(11, objeto.getLocalidade());
+			preparedSql.setString(12, objeto.getUf());
+			preparedSql.setString(13, objeto.getNumero());
 
 			preparedSql.execute(); // executa o preparedSql com os sets
 			connection.commit(); //
@@ -49,7 +56,7 @@ public class DAOUsuarioRepository {
 			}
 			
 		} else { // atualiza usuario
-			String sql = "update model_login set login=?, senha=?, nome=?, email=?, perfil=?, sexo=? where id=" + objeto.getId()
+			String sql = "update model_login set login=?, senha=?, nome=?, email=?, perfil=?, sexo=?, cep=?, logradouro=?, bairro=?, localidade=?, uf=?, numero=? where id=" + objeto.getId()
 					+ ";";
 			PreparedStatement preparedSql = connection.prepareStatement(sql);
 
@@ -59,6 +66,13 @@ public class DAOUsuarioRepository {
 			preparedSql.setString(4, objeto.getEmail());
 			preparedSql.setString(5, objeto.getPerfil());
 			preparedSql.setString(6, objeto.getSexo());
+			
+			preparedSql.setString(7, objeto.getCep());
+			preparedSql.setString(8, objeto.getLogradouro());
+			preparedSql.setString(9, objeto.getBairro());
+			preparedSql.setString(10, objeto.getLocalidade());
+			preparedSql.setString(11, objeto.getUf());
+			preparedSql.setString(12, objeto.getNumero());
 
 			preparedSql.executeUpdate();
 			connection.commit();
@@ -78,10 +92,51 @@ public class DAOUsuarioRepository {
 
 		return this.consultaUsuario(objeto.getLogin());
 	}
+	
+	public List<ModelLogin> consultaUsuarioListPaginado(Long userLogado, Integer offset) throws Exception {
+		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
+		String sql = "select * from model_login where useradmin is false and usuario_id=" + userLogado+" order by nome offset "+offset+" limit 5"; // like + %%;
+																										// contém
+		PreparedStatement statement = connection.prepareStatement(sql);
 
+		ResultSet resultado = statement.executeQuery();
+		while (resultado.next()) { // percorrer as linhas de resultado do SQL
+			ModelLogin modelLogin = new ModelLogin();
+			modelLogin.setEmail(resultado.getString("email"));
+			modelLogin.setId(resultado.getLong("id"));
+			modelLogin.setLogin(resultado.getString("login"));
+			modelLogin.setNome(resultado.getString("nome"));
+			modelLogin.setPerfil(resultado.getString("perfil"));
+			modelLogin.setSexo(resultado.getString("sexo"));
+			// modelLogin.setSenha(resultado.getString("senha"));
+
+			retorno.add(modelLogin);
+		}
+		return retorno;
+	}
+
+	public int totalPaginas(Long userLogado) throws Exception{
+		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
+		String sql = "select count(1) as total from model_login where usuario_id="+userLogado;
+		
+		PreparedStatement statement = connection.prepareStatement(sql);
+		ResultSet resultado = statement.executeQuery();
+		resultado.next();
+		
+		Double cadastros=resultado.getDouble("total");
+		Double porPagina=5.0;
+		Double quantPaginas=cadastros/porPagina;
+		Double resto=quantPaginas%2;
+		if(resto>0) {
+			quantPaginas++;
+		}
+	 
+		return quantPaginas.intValue();
+	}
+	
 	public List<ModelLogin> consultaUsuarioList(Long userLogado) throws Exception {
 		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
-		String sql = "select * from model_login where useradmin is false and usuario_id=" + userLogado; // like + %%;
+		String sql = "select * from model_login where useradmin is false and usuario_id=" + userLogado+" limit 5"; // like + %%;
 																										// contém
 		PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -103,7 +158,7 @@ public class DAOUsuarioRepository {
 
 	public List<ModelLogin> consultaUsuarioList(String nome, Long userLogado) throws Exception {
 		List<ModelLogin> retorno = new ArrayList<ModelLogin>();
-		String sql = "select * from model_login where upper(nome) like upper(?) and useradmin is false and usuario_id=?"; // like
+		String sql = "select * from model_login where upper(nome) like upper(?) and useradmin is false and usuario_id=? limit 5"; // like
 																															// +
 																															// %%;
 																															// contém
@@ -127,11 +182,12 @@ public class DAOUsuarioRepository {
 		return retorno;
 	}
 
+	
 	// login sempre único
 	public ModelLogin consultaUsuarioLogado(String login) throws Exception {
 		ModelLogin modelLogin = new ModelLogin();
 
-		String sql = "select * from model_login where upper(login)=upper('" + login + "')";
+		String sql = "select * from model_login where upper(login)=upper('"+login+"')";
 
 		PreparedStatement statement = connection.prepareStatement(sql);
 		ResultSet resultado = statement.executeQuery();
@@ -145,7 +201,15 @@ public class DAOUsuarioRepository {
 			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
 			modelLogin.setSexo(resultado.getString("sexo"));
+			
 			modelLogin.setFotoUser(resultado.getString("fotouser"));
+			
+			modelLogin.setCep(resultado.getString("cep"));
+			modelLogin.setLogradouro(resultado.getString("logradouro"));
+			modelLogin.setBairro(resultado.getString("bairro"));
+			modelLogin.setLocalidade(resultado.getString("localidade"));
+			modelLogin.setUf(resultado.getString("Uf"));
+			modelLogin.setNumero(resultado.getString("numero"));
 		}
 		return modelLogin;
 	}
@@ -168,7 +232,15 @@ public class DAOUsuarioRepository {
 			modelLogin.setUseradmin(resultado.getBoolean("useradmin"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
 			modelLogin.setSexo(resultado.getString("sexo"));
+			
 			modelLogin.setFotoUser(resultado.getString("fotouser"));
+			
+			modelLogin.setCep(resultado.getString("cep"));
+			modelLogin.setLogradouro(resultado.getString("logradouro"));
+			modelLogin.setBairro(resultado.getString("bairro"));
+			modelLogin.setLocalidade(resultado.getString("localidade"));
+			modelLogin.setUf(resultado.getString("Uf"));
+			modelLogin.setNumero(resultado.getString("numero"));
 		}
 		return modelLogin;
 	}
@@ -191,7 +263,15 @@ public class DAOUsuarioRepository {
 			modelLogin.setNome(resultado.getString("nome"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
 			modelLogin.setSexo(resultado.getString("sexo"));
+			
 			modelLogin.setFotoUser(resultado.getString("fotouser"));
+			
+			modelLogin.setCep(resultado.getString("cep"));
+			modelLogin.setLogradouro(resultado.getString("logradouro"));
+			modelLogin.setBairro(resultado.getString("bairro"));
+			modelLogin.setLocalidade(resultado.getString("localidade"));
+			modelLogin.setUf(resultado.getString("Uf"));
+			modelLogin.setNumero(resultado.getString("numero"));
 		}
 		return modelLogin;
 	}
@@ -215,8 +295,16 @@ public class DAOUsuarioRepository {
 			modelLogin.setNome(resultado.getString("nome"));
 			modelLogin.setPerfil(resultado.getString("perfil"));
 			modelLogin.setSexo(resultado.getString("sexo"));
+			
 			modelLogin.setFotoUser(resultado.getString("fotouser"));
 			modelLogin.setextensaofotouser(resultado.getString("extensaofotouser"));
+			
+			modelLogin.setCep(resultado.getString("cep"));
+			modelLogin.setLogradouro(resultado.getString("logradouro"));
+			modelLogin.setBairro(resultado.getString("bairro"));
+			modelLogin.setLocalidade(resultado.getString("localidade"));
+			modelLogin.setUf(resultado.getString("Uf"));
+			modelLogin.setNumero(resultado.getString("numero"));
 		}
 		return modelLogin;
 	}
