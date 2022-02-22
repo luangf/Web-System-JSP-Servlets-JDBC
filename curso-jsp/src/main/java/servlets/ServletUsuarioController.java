@@ -1,28 +1,24 @@
 package servlets;
 
 import java.io.IOException;
-
 import java.util.List;
 
-import org.apache.tomcat.jakartaee.commons.compress.utils.IOUtils;
+import org.apache.commons.compress.utils.IOUtils;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import dao.DAOUsuarioRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 //import jakarta.servlet.annotation.WebServlet;//bug
-import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.ModelLogin;
+
 //Mapeamento, parte url que vem no navegador...
 //@WebServlet(urlPatterns={"/ServletUsuarioController","/principal/usuario.jsp"})//bug
-
 @MultipartConfig
 public class ServletUsuarioController extends ServletGenericUtil {
 	private static final long serialVersionUID = 1L;
@@ -62,6 +58,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				ObjectMapper mapper=new ObjectMapper();
 				String json=mapper.writeValueAsString(dadosJsonUser);
 				
+				response.addHeader("totalPaginas", ""+daoUsuarioRepository.consultaUsuarioListTotalPaginaPaginacao(nomeBusca, super.getUserLogado(request)));
 				response.getWriter().write(json);
 				
 			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarEditar")) {//?acao=buscarEditar
@@ -92,6 +89,13 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					response.getOutputStream().write(new Base64().decodeBase64(modelLogin.getFotoUser().split("\\,")[1]));
 				}
 				
+			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("paginar")) {
+				Integer offset=Integer.parseInt(request.getParameter("pagina"));
+				List<ModelLogin> modelLogins=daoUsuarioRepository.consultaUsuarioListPaginado(this.getUserLogado(request), offset);
+				
+				request.setAttribute("modelLogins", modelLogins);
+				request.setAttribute("totalPaginas", daoUsuarioRepository.totalPaginas(this.getUserLogado(request)));
+				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
 			}else {
 				List<ModelLogin> modelLogins=daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
 				request.setAttribute("modelLogins", modelLogins);

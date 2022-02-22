@@ -3,7 +3,8 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<c:set scope="session" var="perfil" value='<%=request.getSession().getAttribute("perfil").toString()%>'></c:set>
+<c:set scope="session" var="perfil"
+	value='<%=request.getSession().getAttribute("perfil")%>'></c:set>
 
 <nav class="pcoded-navbar">
 	<div class="sidebar_toggle">
@@ -12,9 +13,18 @@
 	<div class="pcoded-inner-navbar main-menu">
 		<div class="">
 			<div class="main-menu-header">
-				<img class="img-80 img-radius"
-					src="<%=request.getContextPath()%>/assets/images/avatar-4.jpg"
-					alt="User-Profile-Image">
+
+				<c:if test="${imageUser != '' && imageUser != null}">
+					<img class="img-80 img-radius" src="${imageUser}"
+						alt="User-Profile-Image">
+				</c:if>
+
+				<c:if test="${imageUser == '' || imageUser == null}">
+					<img class="img-80 img-radius"
+						src="<%=request.getContextPath()%>/assets/images/avatar-4.jpg"
+						alt="User-Profile-Image">
+				</c:if>
+
 				<div class="user-details">
 					<span id="more-details"><%=session.getAttribute("usuario")%><i
 						class="fa fa-caret-down"></i></span>
@@ -23,11 +33,10 @@
 
 			<div class="main-menu-content">
 				<ul>
-					<li class="more-details"><a href="user-profile.html">
-							<!-- <i
+					<li class="more-details"><a href="user-profile.html"> <!-- <i
 							class="ti-user"></i>View Profile</a> <a href="#!"><i
-							class="ti-settings"></i>Configurações</a> -->
-							<a href="<%=request.getContextPath()%>/ServletLogin?acao=logout"><i
+							class="ti-settings"></i>Configurações</a> --> <a
+							href="<%=request.getContextPath()%>/ServletLogin?acao=logout"><i
 								class="ti-layout-sidebar-left"></i>Sair</a></li>
 				</ul>
 			</div>

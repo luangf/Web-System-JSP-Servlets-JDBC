@@ -1,9 +1,8 @@
 package servlets;
 
 import java.io.Serializable;
-import java.sql.Connection;
 
-import connection.SingleConnectionBanco;
+
 import dao.DAOUsuarioRepository;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;

@@ -259,10 +259,10 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 												<% 
 													int totalPaginas=(int)request.getAttribute("totalPaginas");
 													for(int i=0;i<totalPaginas;i++){
-													
+														String url=request.getContextPath()+"/ServletUsuarioController?acao=paginar&pagina="+(i*5); //consultar os dados paginados
+														out.print("<li class=\"page-item\"><a class=\"page-link\" href=\""+url+"\">"+(i+1)+"</a></li>");
 													}
 												%>
-												<li class="page-item"><a class="page-link" href="#">1</a></li>
 											</ul>
 										</nav>
 
@@ -317,6 +317,13 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 							</tbody>
 						</table>
 					</div>
+					
+					<nav aria-label="Page navigation example">
+						<ul class="pagination" id="ulPaginacaoUserAjax">
+						
+						</ul>
+					</nav>
+					
 					<span id="totalResultados"></span>
 				</div>
 				<div class="modal-footer">
@@ -364,6 +371,32 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 			window.location.href=urlAction+'?acao=buscarEditar&id='+id;
 		}
 	
+		function buscaUserPageAjax(url){
+			$.ajax({<!--Tem que ser ajax para a tela do modal n sumir-->
+			method : "get",
+			url : url,
+			success : function(response, textStatus, xhr) {
+				var json = JSON.parse(response);
+				$('tabelaresultados > tbody > tr').remove();//pode ter feito uma pesquisa anterior; remover todas as linhas, '>'(simboliza dentro)
+				$("#ulPaginacaoUserAjax  > li").remove();
+				for (var p = 0; p < json.length; p++) { //iteragir para todos elementos do json
+					$('#tabelaresultados > tbody').append('<tr> <td> '+ json[p].id+' </td> <td> '+json[p].nome+' </td> <td> <button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>')
+				}
+
+			document.getElementById('totalResultados').textContent = 'Resultados: '+ json.length;
+			
+			var totalPaginas=xhr.getResponseHeader("totalPaginas");
+
+			for(var i=0;i<totalPaginas;i++){
+				var url=urlAction+"?nomeBusca="+nomeBusca+"&acao=buscarUserAjaxPage&pagina="+(i*5);
+				$("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" onclick=buscaUserPageAjax('+url+')>'+(i+1)+'</a></li>');
+			}
+			}
+		}).fail(function(xhr, status, errorThrown) {
+				alert('Erro ao buscar usuário por nome: '+ xhr.responseText);
+		});
+		}
+		
 		function buscarUsuario() {<!-- Buscar usuário por nome-->
 			var nomeBusca = document.getElementById('nomeBusca').value;<!--Nome que a pessoa digitar no modal-->
 			if (nomeBusca != null && nomeBusca != '' && nomeBusca.trim() != '') {<!--Se tiver algo executa a função de fato-->
@@ -372,14 +405,22 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 					method : "get",
 					url : urlAction,
 					data : "nomeBusca=" +nomeBusca+ "&acao=buscarUserAjax",
-					success : function(response) {
+					success : function(response, textStatus, xhr) {
 						var json = JSON.parse(response);
 						$('tabelaresultados > tbody > tr').remove();//pode ter feito uma pesquisa anterior; remover todas as linhas, '>'(simboliza dentro)
+						$("#ulPaginacaoUserAjax  > li").remove();
 						for (var p = 0; p < json.length; p++) { //iteragir para todos elementos do json
 							$('#tabelaresultados > tbody').append('<tr> <td> '+ json[p].id+' </td> <td> '+json[p].nome+' </td> <td> <button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>')
 						}
 
 					document.getElementById('totalResultados').textContent = 'Resultados: '+ json.length;
+					
+					var totalPaginas=xhr.getResponseHeader("totalPaginas");
+	
+					for(var i=0;i<totalPaginas;i++){
+						var url=urlAction+"?nomeBusca="+nomeBusca+"&acao=buscarUserAjaxPage&pagina="+(i*5);
+						$("#ulPaginacaoUserAjax").append('<li class="page-item"><a class="page-link" onclick=buscaUserPageAjax('+url+')>'+(i+1)+'</a></li>');
+					}
 					}
 				}).fail(function(xhr, status, errorThrown) {
 						alert('Erro ao buscar usuário por nome: '+ xhr.responseText);

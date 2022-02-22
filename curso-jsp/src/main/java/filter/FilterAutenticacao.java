@@ -3,7 +3,6 @@ package filter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-
 import connection.SingleConnectionBanco;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -19,6 +18,8 @@ import jakarta.servlet.http.HttpSession;
 @WebFilter(urlPatterns = { "/principal/*" }) // intercepta todas as requisições do projeto ou mapeamento
 public class FilterAutenticacao extends HttpFilter {
 
+	private static final long serialVersionUID = 1L;
+	
 	private static Connection connection;
 
 	public FilterAutenticacao() {
