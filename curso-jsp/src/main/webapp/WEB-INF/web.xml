@@ -15,27 +15,21 @@
     <servlet-name>ServletLogin</servlet-name>
     <servlet-class>servlets.ServletLogin</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>ServletLogin</servlet-name>
-    <url-pattern>/ServletLogin</url-pattern>
-  </servlet-mapping>
   <filter>
     <display-name>FilterAutenticacao</display-name>
     <filter-name>FilterAutenticacao</filter-name>
     <filter-class>filter.FilterAutenticacao</filter-class>
   </filter>
-  <filter-mapping>
-    <filter-name>FilterAutenticacao</filter-name>
-    <url-pattern>/FilterAutenticacao</url-pattern>
-  </filter-mapping>
   <servlet>
     <description></description>
     <display-name>ServletUsuarioController</display-name>
     <servlet-name>ServletUsuarioController</servlet-name>
     <servlet-class>servlets.ServletUsuarioController</servlet-class>
   </servlet>
-  <servlet-mapping>
-    <servlet-name>ServletUsuarioController</servlet-name>
-    <url-pattern>/ServletUsuarioController</url-pattern>
-  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ServletTelefone</display-name>
+    <servlet-name>ServletTelefone</servlet-name>
+    <servlet-class>servlets.ServletTelefone</servlet-class>
+  </servlet>
 </web-app>

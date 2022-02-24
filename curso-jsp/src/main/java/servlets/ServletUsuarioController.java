@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+
 import java.util.List;
 
 import org.apache.commons.compress.utils.IOUtils;
@@ -11,14 +13,14 @@ import dao.DAOUsuarioRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
-//import jakarta.servlet.annotation.WebServlet;//bug
+import jakarta.servlet.annotation.WebServlet;//bug
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import model.ModelLogin;
 
 //Mapeamento, parte url que vem no navegador...
-//@WebServlet(urlPatterns={"/ServletUsuarioController","/principal/usuario.jsp"})//bug
+@WebServlet(urlPatterns={"/ServletUsuarioController","/principal/usuario.jsp"})//bug
 @MultipartConfig
 public class ServletUsuarioController extends ServletGenericUtil {
 	private static final long serialVersionUID = 1L;

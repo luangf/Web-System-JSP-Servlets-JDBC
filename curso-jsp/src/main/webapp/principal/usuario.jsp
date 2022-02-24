@@ -200,7 +200,7 @@ if (modelLogin != null && modelLogin.getSexo().equals("MASCULINO")) {
 	out.print("");
 	out.print("checked=\"checked\"");
 	out.print("");
-}%>>Masculino</>
+}%>> Masculino</>
 
 																<input type="radio" name="sexo" value="FEMININO"
 																	<%modelLogin = (ModelLogin) request.getAttribute("modelLogin");
@@ -209,7 +209,7 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 	out.print("");
 	out.print("checked=\"checked\"");
 	out.print("");
-}%>>Feminino</>
+}%>> Feminino</>
 															</div>
 
 															<button type="button"
@@ -223,7 +223,12 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 															<button type="button"
 																class="btn btn-info waves-effect waves-light"
 																onclick="criarDeleteComAjax()">Excluir</button>
-
+															<c:if test="${modelLogin.id>0}">
+																<!--tag a pq tem q enviar para a servlet de telefone o parametro do usuario sendo editado//dispara um get(href)-->
+																<a
+																	href="<%=request.getContextPath()%>/ServletTelefone?idUser=${modelLogin.id}"
+																	class="btn btn-primary waves-effect waves-light">Telefone</a>
+															</c:if>
 															<button type="button" class="btn btn-secondary"
 																data-toggle="modal" data-target="#exampleModalUsuario">Pesquisar</button>
 														</form>
@@ -256,12 +261,12 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 										</div>
 										<nav aria-label="Page navigation example">
 											<ul class="pagination">
-												<% 
-													int totalPaginas=(int)request.getAttribute("totalPaginas");
-													for(int i=0;i<totalPaginas;i++){
-														String url=request.getContextPath()+"/ServletUsuarioController?acao=paginar&pagina="+(i*5); //consultar os dados paginados
-														out.print("<li class=\"page-item\"><a class=\"page-link\" href=\""+url+"\">"+(i+1)+"</a></li>");
-													}
+												<%
+												int totalPaginas = (int) request.getAttribute("totalPaginas");
+												for (int i = 0; i < totalPaginas; i++) {
+													String url = request.getContextPath() + "/ServletUsuarioController?acao=paginar&pagina=" + (i * 5); //consultar os dados paginados
+													out.print("<li class=\"page-item\"><a class=\"page-link\" href=\"" + url + "\">" + (i + 1) + "</a></li>");
+												}
 												%>
 											</ul>
 										</nav>
@@ -317,13 +322,13 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 							</tbody>
 						</table>
 					</div>
-					
+
 					<nav aria-label="Page navigation example">
 						<ul class="pagination" id="ulPaginacaoUserAjax">
-						
+
 						</ul>
 					</nav>
-					
+
 					<span id="totalResultados"></span>
 				</div>
 				<div class="modal-footer">

@@ -3,18 +3,19 @@ package servlets;
 import java.io.IOException;
 
 
+
 import dao.DAOLoginRepository;
 import dao.DAOUsuarioRepository;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-//import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.ModelLogin;
 
 //Ou ServletLoginController
-//@WebServlet(urlPatterns={"/principal/ServletLogin","/ServletLogin"})
+@WebServlet(urlPatterns={"/principal/ServletLogin","/ServletLogin"})
 public class ServletLogin extends HttpServlet {//classe java que extende HttpServlet
 
 	private static final long serialVersionUID = 1L;

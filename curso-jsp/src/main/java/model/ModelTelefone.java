@@ -9,7 +9,7 @@ public class ModelTelefone implements Serializable{
 	
 	private Long id;
 	private String numero;
-	private ModelLogin usuario_pai_id; //usuario sendo acessado pelo "ver" no momento
+	private ModelLogin usuario_pai_id; //usuario sendo acessado pelo "ver" no momento //tipo ModelLogin para poder acessar outras infos
 	private ModelLogin usuario_cad_id; //usuario da sessão
 	
 	public Long getId() {
