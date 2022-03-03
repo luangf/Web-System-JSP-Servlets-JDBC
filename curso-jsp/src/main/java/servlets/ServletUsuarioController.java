@@ -2,7 +2,6 @@ package servlets;
 
 import java.io.IOException;
 
-
 import java.util.List;
 
 import org.apache.commons.compress.utils.IOUtils;
@@ -20,7 +19,8 @@ import jakarta.servlet.http.Part;
 import model.ModelLogin;
 
 //Mapeamento, parte url que vem no navegador...
-@WebServlet(urlPatterns={"/ServletUsuarioController","/principal/usuario.jsp"})//bug
+//@WebServlet(urlPatterns={"/ServletUsuarioController","/principal/usuario.jsp"})//bug
+@WebServlet("/ServletUsuarioController")//bug
 @MultipartConfig
 public class ServletUsuarioController extends ServletGenericUtil {
 	private static final long serialVersionUID = 1L;

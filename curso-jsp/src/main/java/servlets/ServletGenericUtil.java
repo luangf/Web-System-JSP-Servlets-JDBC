@@ -22,7 +22,7 @@ public class ServletGenericUtil extends HttpServlet implements Serializable{
 	}
 	
 	public ModelLogin getUserLogadoObj(HttpServletRequest request) throws Exception {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(); //objeto da sessão
 		String usuarioLogado = (String) session.getAttribute("usuario");
 		return daoUsuarioRepository.consultaUsuarioLogado(usuarioLogado);
 	}

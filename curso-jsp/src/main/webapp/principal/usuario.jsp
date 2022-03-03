@@ -59,18 +59,15 @@
 																<div class="input-group-prepend">
 																	<c:if
 																		test="${modelLogin.fotoUser != '' && modelLogin.fotoUser != null}">
-																		<a
-																			href="<%=request.getContextPath()%>/ServletUsuarioController?acao=downloadFoto&id=${modelLogin.id}">
+																		<a href="<%=request.getContextPath()%>/ServletUsuarioController?acao=downloadFoto&id=${modelLogin.id}">
 																			<!--href sempre dispara um GET--> <img
 																			alt="Imagem User" id="fotoembase64"
 																			src="${modelLogin.fotoUser}" width="70px">
 																		</a>
 																	</c:if>
 
-																	<c:if
-																		test="${modelLogin.fotoUser == '' || modelLogin.fotoUser == null}">
-																		<img alt="Imagem User" id="fotoembase64"
-																			src="/assets/images/user.png" width="70px">
+																	<c:if test="${modelLogin.fotoUser == '' || modelLogin.fotoUser == null}">
+																		<img alt="Imagem User" id="fotoembase64" src="assets/images/user.png" width="70px">
 																	</c:if>
 																</div>
 																<input type="file" id="fileFoto" name="fileFoto"
@@ -200,16 +197,17 @@ if (modelLogin != null && modelLogin.getSexo().equals("MASCULINO")) {
 	out.print("");
 	out.print("checked=\"checked\"");
 	out.print("");
-}%>> Masculino</>
-
-																<input type="radio" name="sexo" value="FEMININO"
+}%>>
+																Masculino</> <input type="radio" name="sexo"
+																	value="FEMININO"
 																	<%modelLogin = (ModelLogin) request.getAttribute("modelLogin");
 
 if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 	out.print("");
 	out.print("checked=\"checked\"");
 	out.print("");
-}%>> Feminino</>
+}%>>
+																Feminino</>
 															</div>
 
 															<button type="button"

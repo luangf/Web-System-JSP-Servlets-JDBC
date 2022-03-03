@@ -25,6 +25,9 @@ public class DAOTelefoneRepository {
 		
 		String sql="select * from telefone where usuario_pai_id=?";
 		PreparedStatement preparedStatement=connection.prepareStatement(sql);
+		
+		preparedStatement.setLong(1,idUserPai);
+		
 		ResultSet rs=preparedStatement.executeQuery();
 		
 		while(rs.next()) {
@@ -48,7 +51,7 @@ public class DAOTelefoneRepository {
 		
 		preparedStatement.setString(1, modelTelefone.getNumero()); //recebe os dados por String, msm sendo numero...//1(primeiro '?')
 		preparedStatement.setLong(2, modelTelefone.getUsuario_pai_id().getId()); //user pai=usuario acessado no momento
-		preparedStatement.setLong(2, modelTelefone.getUsuario_cad_id().getId()); //user cad=usuario da sessão
+		preparedStatement.setLong(3, modelTelefone.getUsuario_cad_id().getId()); //user cad=usuario da sessão
 		
 		preparedStatement.execute();
 		connection.commit(); //salva as alterações no banco de dados
@@ -59,9 +62,9 @@ public class DAOTelefoneRepository {
 		String sql="delete from telefone where id=?";
 		PreparedStatement preparedStatement=connection.prepareStatement(sql); //prepara o sql
 		
-		preparedStatement.setLong(1, id);
+		preparedStatement.setLong(1, id); //primeiro e unico ?
 		
-		preparedStatement.executeUpdate();
+		preparedStatement.executeUpdate(); //com o ...Update já que atualiza o bd existente
 		connection.commit();
 	}
 }

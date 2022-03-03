@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
+	
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -49,8 +51,8 @@
 																	User:</label>
 															</div>
 															<div class="form-group form-default form-static-label">
-																<input readonly="readonly" type="text" name="nome" id="nome"
-																	class="form-control" required="required"
+																<input readonly="readonly" type="text" name="nome"
+																	id="nome" class="form-control" required="required"
 																	value="${modelLogin.nome}"> <span
 																	class="form-bar"></span> <label class="float-label">Nome:</label>
 															</div>
@@ -59,7 +61,9 @@
 																	class="form-control" required="required"> <span
 																	class="form-bar"></span> <label class="float-label">Número:</label>
 															</div>
-															<a href="<%=request.getContextPath()%>/ServletUsuarioController" class="btn btn-info">Voltar</a>
+															<a
+																href="<%=request.getContextPath()%>/ServletUsuarioController?acao=buscarEditar&id=${modelLogin.id}"
+																class="btn btn-info">Voltar</a>
 															<button class="btn btn-success waves-effect waves-light">Salvar</button>
 														</form>
 													</div>
@@ -67,6 +71,27 @@
 											</div>
 										</div>
 										<span id="msg">${msg}</span>
+										<div style="height: 500px; overflow: scroll;">
+											<table class="table" id="tabelaresultadosview">
+												<thead>
+													<tr>
+														<th scope="col">Id</th>
+														<th scope="col">Número</th>
+														<th scope="col">Excluir</th>
+													</tr>
+												</thead>
+												<tbody>
+													<c:forEach items='${modelTelefones}' var='f'>
+														<tr>
+															<td><c:out value="${f.id}"></c:out></td>
+															<td><c:out value="${f.numero}"></c:out></td>
+															<td><a class="btn btn-success"
+																href="<%=request.getContextPath()%>/ServletTelefone?acao=excluir&id=${f.id}&userpai=${modelLogin.id}">Excluir</a></td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</div>
 									</div>
 									<!-- Page-body end -->
 								</div>
