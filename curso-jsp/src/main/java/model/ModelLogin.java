@@ -2,7 +2,9 @@ package model;
 
 import java.io.Serializable;
 //Classe Model(classe de modelo)
+
 //model implementa o serializable (padrao)
+import java.sql.Date;
 public class ModelLogin implements Serializable {
 
 	//model tem essa variavel (padrao)
@@ -13,6 +15,7 @@ public class ModelLogin implements Serializable {
 	private String email;
 	private String login;
 	private String senha;
+	private Date dataNascimento;
 	private boolean useradmin;
 	private String perfil;
 	private String sexo;
@@ -24,6 +27,14 @@ public class ModelLogin implements Serializable {
 	private String localidade;
 	private String uf; //estado
 	private String numero;
+	
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
+	}
+	
+	public Date getDataNascimento() {
+		return dataNascimento;
+	}
 	
 	public String getExtensaofotouser() {
 		return extensaofotouser;

@@ -1,6 +1,7 @@
 package dao;
 
 import java.sql.Connection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class DAOUsuarioRepository {
 	public ModelLogin gravarUsuario(ModelLogin objeto, Long userLogado) throws Exception {
 		if (objeto.isNovo()) { // grava novo usuario
 
-			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo, cep, logradouro, bairro, localidade, uf, numero) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO model_login(login, senha, nome, email, usuario_id, perfil, sexo, cep, logradouro, bairro, localidade, uf, numero, datanascimento) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 			PreparedStatement preparedSql = connection.prepareStatement(sql);
 
 			preparedSql.setString(1, objeto.getLogin());
@@ -37,6 +38,7 @@ public class DAOUsuarioRepository {
 			preparedSql.setString(11, objeto.getLocalidade());
 			preparedSql.setString(12, objeto.getUf());
 			preparedSql.setString(13, objeto.getNumero());
+			preparedSql.setDate(14, objeto.getDataNascimento());
 
 			preparedSql.execute(); // executa o preparedSql com os sets
 			connection.commit(); //
@@ -55,7 +57,7 @@ public class DAOUsuarioRepository {
 			}
 
 		} else { // atualiza usuario
-			String sql = "update model_login set login=?, senha=?, nome=?, email=?, perfil=?, sexo=?, cep=?, logradouro=?, bairro=?, localidade=?, uf=?, numero=? where id="
+			String sql = "update model_login set login=?, senha=?, nome=?, email=?, perfil=?, sexo=?, cep=?, logradouro=?, bairro=?, localidade=?, uf=?, numero=?, datanascimento=? where id="
 					+ objeto.getId() + ";";
 			PreparedStatement preparedSql = connection.prepareStatement(sql);
 
@@ -72,7 +74,8 @@ public class DAOUsuarioRepository {
 			preparedSql.setString(10, objeto.getLocalidade());
 			preparedSql.setString(11, objeto.getUf());
 			preparedSql.setString(12, objeto.getNumero());
-
+			preparedSql.setDate(13, objeto.getDataNascimento());
+			
 			preparedSql.executeUpdate();
 			connection.commit();
 

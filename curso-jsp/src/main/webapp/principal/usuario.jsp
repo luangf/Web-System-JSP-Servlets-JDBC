@@ -59,15 +59,18 @@
 																<div class="input-group-prepend">
 																	<c:if
 																		test="${modelLogin.fotoUser != '' && modelLogin.fotoUser != null}">
-																		<a href="<%=request.getContextPath()%>/ServletUsuarioController?acao=downloadFoto&id=${modelLogin.id}">
+																		<a
+																			href="<%=request.getContextPath()%>/ServletUsuarioController?acao=downloadFoto&id=${modelLogin.id}">
 																			<!--href sempre dispara um GET--> <img
 																			alt="Imagem User" id="fotoembase64"
 																			src="${modelLogin.fotoUser}" width="70px">
 																		</a>
 																	</c:if>
 
-																	<c:if test="${modelLogin.fotoUser == '' || modelLogin.fotoUser == null}">
-																		<img alt="Imagem User" id="fotoembase64" src="assets/images/user.png" width="70px">
+																	<c:if
+																		test="${modelLogin.fotoUser == '' || modelLogin.fotoUser == null}">
+																		<img alt="Imagem User" id="fotoembase64"
+																			src="assets/images/user.png" width="70px">
 																	</c:if>
 																</div>
 																<input type="file" id="fileFoto" name="fileFoto"
@@ -82,6 +85,13 @@
 																	class="form-control" required="required"
 																	value="${modelLogin.nome}"> <span
 																	class="form-bar"></span> <label class="float-label">Nome</label>
+															</div>
+
+															<div class="form-group form-default form-static-label">
+																<input type="text" name="dataNascimento" id="dataNascimento"
+																	class="form-control" required="required"
+																	value="${modelLogin.dataNascimento}"> <span
+																	class="form-bar"></span> <label class="float-label">Dat. Nascimento:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -338,6 +348,26 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 	</div>
 
 	<script type="text/javascript">
+		$(function() {
+			$("#dataNascimento").datepicker({
+				dateFormat: 'dd/mm/yy',
+			    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+			    dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+			    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+			    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+			    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+			    nextText: 'Próximo',
+			    prevText: 'Anterior'
+			});
+		});
+	
+		$("#numero").keypress(function(event){ <!--só aceitar numero-->
+			return /\d/.test(String.fromCharCode(event.keyCode));
+		});
+		$("#cep").keypress(function(event){
+			return /\d/.test(String.fromCharCode(event.keyCode));
+		});
+		
 		function pesquisaCep(){
 			var cep=${"#cep"}.val();
 			//ajax/jquery para capturar o json que vem do webservice viacep
