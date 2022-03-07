@@ -88,10 +88,17 @@
 															</div>
 
 															<div class="form-group form-default form-static-label">
-																<input type="text" name="dataNascimento" id="dataNascimento"
+																<input type="date" name="dataNascimento" id="dataNascimento"
 																	class="form-control" required="required"
 																	value="${modelLogin.dataNascimento}"> <span
 																	class="form-bar"></span> <label class="float-label">Dat. Nascimento:</label>
+															</div>
+
+															<div class="form-group form-default form-static-label">
+																<input type="text" name="rendaMensal" id="rendaMensal"
+																	class="form-control" required="required"
+																	value="${modelLogin.rendaMensal}"> <span
+																	class="form-bar"></span> <label class="float-label">Renda Mensal:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -348,6 +355,9 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 	</div>
 
 	<script type="text/javascript">
+		$("#rendaMensal").maskMoney({showSymbol:true, symbol:"R$ ", decimal:",", thousands:"."});
+	
+		<!--
 		$(function() {
 			$("#dataNascimento").datepicker({
 				dateFormat: 'dd/mm/yy',
@@ -359,7 +369,7 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 			    nextText: 'Próximo',
 			    prevText: 'Anterior'
 			});
-		});
+		});-->
 	
 		$("#numero").keypress(function(event){ <!--só aceitar numero-->
 			return /\d/.test(String.fromCharCode(event.keyCode));
