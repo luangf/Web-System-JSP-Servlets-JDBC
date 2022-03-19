@@ -36,5 +36,5 @@
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/assets/css/style.css">
       
-      <link href="https://code.jquery.com/uri/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
+      <link href="https://code.jquery.com/ui/1.9.1/themes/smoothness/jquery-ui.css" rel="stylesheet">
  </head>

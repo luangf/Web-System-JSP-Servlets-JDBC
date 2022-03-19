@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 //model implementa o serializable (padrao)
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 public class ModelLogin implements Serializable {
 
 	//model tem essa variavel (padrao)
@@ -28,6 +30,15 @@ public class ModelLogin implements Serializable {
 	private String uf; //estado
 	private String numero;
 	private Double rendaMensal;
+	private List<ModelTelefone> telefones=new ArrayList<ModelTelefone>();
+	
+	public void setTelefones(List<ModelTelefone> telefones) {
+		this.telefones = telefones;
+	}
+	
+	public List<ModelTelefone> getTelefones() {
+		return telefones;
+	}
 	
 	public void setRendaMensal(Double rendaMensal) {
 		this.rendaMensal = rendaMensal;

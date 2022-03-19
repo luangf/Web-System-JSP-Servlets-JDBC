@@ -2,6 +2,7 @@ package servlets;
 
 import java.io.IOException;
 
+
 import java.util.List;
 
 import dao.DAOTelefoneRepository;
@@ -81,20 +82,25 @@ public class ServletTelefone extends ServletGenericUtil {
 			String usuario_pai_id = request.getParameter("id"); // usuario que ta sendo analisado no momento
 			String numero = request.getParameter("numero"); //vem do form do front
 
-			ModelTelefone modelTelefone = new ModelTelefone(); // objeto dos dados recebidos do front
-			
-			modelTelefone.setNumero(numero);
-			modelTelefone.setUsuario_pai_id(daoUsuarioRepository.consultaUsuarioId(Long.parseLong(usuario_pai_id)));//CRUD(R)-read/consultar;sem commit 
-			modelTelefone.setUsuario_cad_id(super.getUserLogadoObj(request)); // usuario logado
-			
-			daoTelefoneRepository.gravarTelefone(modelTelefone);
-			
+			if(!daoTelefoneRepository.existeFone(numero, Long.valueOf(usuario_pai_id))) { //se nao existe entra no if
+				ModelTelefone modelTelefone = new ModelTelefone(); // objeto dos dados recebidos do front
+				
+				modelTelefone.setNumero(numero);
+				modelTelefone.setUsuario_pai_id(daoUsuarioRepository.consultaUsuarioId(Long.parseLong(usuario_pai_id)));//CRUD(R)-read/consultar;sem commit 
+				modelTelefone.setUsuario_cad_id(super.getUserLogadoObj(request)); // usuario logado
+				
+				daoTelefoneRepository.gravarTelefone(modelTelefone);
+				
+				request.setAttribute("msg", "Salvo com sucesso!");
+				
+			}else { //se já existe
+				request.setAttribute("msg", "Telefone já existe!");
+			}
 			List<ModelTelefone> modelTelefones=daoTelefoneRepository.listFone(Long.parseLong(usuario_pai_id));
 			
 			ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(Long.parseLong(usuario_pai_id));//pega a classe modelo da tela passada
 			request.setAttribute("modelLogin", modelLogin);
 			request.setAttribute("modelTelefones", modelTelefones);
-			request.setAttribute("msg", "Salvo com sucesso!");
 			request.getRequestDispatcher("principal/telefone.jsp").forward(request, response);
 		} catch (Exception e) { //catch doPost
 			e.printStackTrace(); //imprime no console do Eclipse o erro

@@ -40,7 +40,7 @@
 												<!-- Basic Form Inputs card start -->
 												<div class="card">
 													<div class="card-block">
-														<h4 class="sub-title">Cad. Usuário</h4>
+														<h4 class="sub-title">Cadastro de Usuário</h4>
 
 														<form class="form-material" enctype="multipart/form-data"
 															action="<%=request.getContextPath()%>/ServletUsuarioController"
@@ -84,14 +84,14 @@
 																<input type="text" name="nome" id="nome"
 																	class="form-control" required="required"
 																	value="${modelLogin.nome}"> <span
-																	class="form-bar"></span> <label class="float-label">Nome</label>
+																	class="form-bar"></span> <label class="float-label">Nome:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
-																<input type="date" name="dataNascimento" id="dataNascimento"
+																<input type="text" name="dataNascimento" id="dataNascimento"
 																	class="form-control" required="required"
 																	value="${modelLogin.dataNascimento}"> <span
-																	class="form-bar"></span> <label class="float-label">Dat. Nascimento:</label>
+																	class="form-bar"></span> <label class="float-label">Data de Nascimento:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -112,34 +112,28 @@
 															<div class="form-group form-default form-static-label">
 																<select class="form-control"
 																	aria-label="Default select example" name="perfil">
-																	<option disabled="disabled">[Selecione o
-																		perfil]</option>
+																	<option disabled="disabled">[Selecione o perfil]</option>
 																	<option value="ADMIN"
 																		<%ModelLogin modelLogin = (ModelLogin) request.getAttribute("modelLogin");
-
-if (modelLogin != null && modelLogin.getPerfil().equals("ADMIN")) {
-	out.print("");
-	out.print("selected=\"selected\"");
-	out.print("");
-}%>>Admin</option>
-
+																			if (modelLogin != null && modelLogin.getPerfil().equals("ADMIN")) {
+																				out.print("");
+																				out.print("selected=\"selected\"");
+																				out.print("");
+																			}%>>Admin</option>
 																	<option value="SECRETARIA"
 																		<%modelLogin = (ModelLogin) request.getAttribute("modelLogin");
-
-if (modelLogin != null && modelLogin.getPerfil().equals("SECRETARIA")) {
-	out.print("");
-	out.print("selected=\"selected\"");
-	out.print("");
-}%>>Secretária</option>
-
+																			if (modelLogin != null && modelLogin.getPerfil().equals("SECRETARIA")) {
+																				out.print("");
+																				out.print("selected=\"selected\"");
+																				out.print("");
+																			}%>>Secretária</option>
 																	<option value="AUXILIAR"
 																		<%modelLogin = (ModelLogin) request.getAttribute("modelLogin");
-
-if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
-	out.print("");
-	out.print("selected=\"selected\"");
-	out.print("");
-}%>>Auxiliar</option>
+																			if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
+																				out.print("");
+																				out.print("selected=\"selected\"");
+																				out.print("");
+																			}%>>Auxiliar</option>
 																</select> <span class="form-bar"></span> <label
 																	class="float-label">Perfil</label>
 															</div>
@@ -156,7 +150,7 @@ if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.logradouro}">
 																<span class="form-bar"></span> <label
-																	class="float-label">Logradouro</label>
+																	class="float-label">Logradouro:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -164,7 +158,7 @@ if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.bairro}">
 																<span class="form-bar"></span> <label
-																	class="float-label">Bairro</label>
+																	class="float-label">Bairro:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -172,14 +166,14 @@ if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.localidade}">
 																<span class="form-bar"></span> <label
-																	class="float-label">Localidade</label>
+																	class="float-label">Localidade:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
 																<input type="text" name="uf" id="uf"
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.uf}"> <span
-																	class="form-bar"></span> <label class="float-label">Estado</label>
+																	class="form-bar"></span> <label class="float-label">Estado:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -187,7 +181,7 @@ if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.numero}">
 																<span class="form-bar"></span> <label
-																	class="float-label">Número</label>
+																	class="float-label">Número:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -195,7 +189,7 @@ if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.login}">
 																<span class="form-bar"></span> <label
-																	class="float-label">Login</label>
+																	class="float-label">Login:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
@@ -203,27 +197,23 @@ if (modelLogin != null && modelLogin.getPerfil().equals("AUXILIAR")) {
 																	class="form-control" required="required"
 																	autocomplete="off" value="${modelLogin.senha}">
 																<span class="form-bar"></span> <label
-																	class="float-label">Senha</label>
+																	class="float-label">Senha:</label>
 															</div>
 
 															<div class="form-group form-default form-static-label">
 																<input type="radio" name="sexo" value="MASCULINO"
 																	<%modelLogin = (ModelLogin) request.getAttribute("modelLogin");
-
-if (modelLogin != null && modelLogin.getSexo().equals("MASCULINO")) {
-	out.print("");
-	out.print("checked=\"checked\"");
-	out.print("");
-}%>>
-																Masculino</> <input type="radio" name="sexo"
-																	value="FEMININO"
+																		if (modelLogin != null && modelLogin.getSexo().equals("MASCULINO")) {
+																			out.print("");
+																			out.print("checked=\"checked\"");
+																			out.print("");
+																		}%>>Masculino</> <input type="radio" name="sexo" value="FEMININO"
 																	<%modelLogin = (ModelLogin) request.getAttribute("modelLogin");
-
-if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
-	out.print("");
-	out.print("checked=\"checked\"");
-	out.print("");
-}%>>
+																		if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
+																			out.print("");
+																			out.print("checked=\"checked\"");
+																			out.print("");
+																		}%>>
 																Feminino</>
 															</div>
 
@@ -357,7 +347,21 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 	<script type="text/javascript">
 		$("#rendaMensal").maskMoney({showSymbol:true, symbol:"R$ ", decimal:",", thousands:"."});
 	
-		<!--
+		const formatter=new Intl.NumberFormat('pt-BR',{
+			currency: 'BRL',
+			minimumFractionDigits: 2
+		});
+		
+		$("#rendaMensal").val(formatter.format($("#rendaMensal").val()));
+		$("#rendaMensal").focus();
+		
+		var dataNascimento=$("#dataNascimento").val();
+		if(dataNascimento != null && dataNascimento != ''){
+			var dateFormat=new Date(dataNascimento);
+			$("#dataNascimento").val(dateFormat.toLocaleDateString('pt-BR',{timeZone:'UTC'}));
+		}
+		$("#nome").focus();
+		
 		$(function() {
 			$("#dataNascimento").datepicker({
 				dateFormat: 'dd/mm/yy',
@@ -369,41 +373,41 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 			    nextText: 'Próximo',
 			    prevText: 'Anterior'
 			});
-		});-->
+		});
 	
-		$("#numero").keypress(function(event){ <!--só aceitar numero-->
+		$("#numero").keypress(function(event){
 			return /\d/.test(String.fromCharCode(event.keyCode));
 		});
 		$("#cep").keypress(function(event){
 			return /\d/.test(String.fromCharCode(event.keyCode));
 		});
 		
+		/*
 		function pesquisaCep(){
 			var cep=${"#cep"}.val();
-			//ajax/jquery para capturar o json que vem do webservice viacep
 			$.getJSON("https://viacep.com.br/ws/"+cep+"/json/?callback=?", function(dados) {
 				if (!("erro" in dados)) {
 					$("#cep").val(dados.cep);
 					$("#logradouro").val(dados.logradouro);
-                    $("#bairro").val(dados.bairro);
-                    $("#localidade").val(dados.localidade);
-                    $("#uf").val(dados.uf);
-				}
+	                $("#bairro").val(dados.bairro);
+	                $("#localidade").val(dados.localidade);
+	                $("#uf").val(dados.uf);
+			}
 			});
-			alert('aew');
 		}
-	
+		*/
+		
 		function visualizarImg(fotoembase64, fileFoto){
-			var preview=document.getElementById(fotoembase64); //campo img html
+			var preview=document.getElementById(fotoembase64);
 			var fileUser=document.getElementById(fileFoto).files[0];
 			var reader=new FileReader();
 			
 			reader.onloadend=function(){
-				preview.src=reader.result; //carrega a foto na tela
+				preview.src=reader.result;
 			};
 			
 			if(fileUser){
-				reader.readAsDataUrl(fileUser); //preview da imagem
+				reader.readAsDataUrl(fileUser);
 			}else{
 				preview.src='';
 			}
@@ -413,16 +417,16 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 			var urlAction = document.getElementById('formUser').action;
 			window.location.href=urlAction+'?acao=buscarEditar&id='+id;
 		}
-	
+		
 		function buscaUserPageAjax(url){
-			$.ajax({<!--Tem que ser ajax para a tela do modal n sumir-->
+			$.ajax({
 			method : "get",
 			url : url,
 			success : function(response, textStatus, xhr) {
 				var json = JSON.parse(response);
-				$('tabelaresultados > tbody > tr').remove();//pode ter feito uma pesquisa anterior; remover todas as linhas, '>'(simboliza dentro)
-				$("#ulPaginacaoUserAjax  > li").remove();
-				for (var p = 0; p < json.length; p++) { //iteragir para todos elementos do json
+				$('tabelaresultados > tbody > tr').remove();
+				$("#ulPaginacaoUserAjax > li").remove();
+				for (var p = 0; p < json.length; p++) {
 					$('#tabelaresultados > tbody').append('<tr> <td> '+ json[p].id+' </td> <td> '+json[p].nome+' </td> <td> <button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>')
 				}
 
@@ -440,19 +444,19 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 		});
 		}
 		
-		function buscarUsuario() {<!-- Buscar usuário por nome-->
-			var nomeBusca = document.getElementById('nomeBusca').value;<!--Nome que a pessoa digitar no modal-->
-			if (nomeBusca != null && nomeBusca != '' && nomeBusca.trim() != '') {<!--Se tiver algo executa a função de fato-->
+		function buscarUsuario() {
+			var nomeBusca = document.getElementById('nomeBusca').value;
+			if (nomeBusca != null && nomeBusca != '' && nomeBusca.trim() != '') {
 				var urlAction = document.getElementById('formUser').action;
-				$.ajax({<!--Tem que ser ajax para a tela do modal n sumir-->
+				$.ajax({
 					method : "get",
 					url : urlAction,
 					data : "nomeBusca=" +nomeBusca+ "&acao=buscarUserAjax",
 					success : function(response, textStatus, xhr) {
 						var json = JSON.parse(response);
-						$('tabelaresultados > tbody > tr').remove();//pode ter feito uma pesquisa anterior; remover todas as linhas, '>'(simboliza dentro)
+						$('tabelaresultados > tbody > tr').remove();
 						$("#ulPaginacaoUserAjax  > li").remove();
-						for (var p = 0; p < json.length; p++) { //iteragir para todos elementos do json
+						for (var p = 0; p < json.length; p++) { 
 							$('#tabelaresultados > tbody').append('<tr> <td> '+ json[p].id+' </td> <td> '+json[p].nome+' </td> <td> <button onclick="verEditar('+json[p].id+')" type="button" class="btn btn-info">Ver</button></td></tr>')
 						}
 
@@ -473,22 +477,22 @@ if (modelLogin != null && modelLogin.getSexo().equals("FEMININO")) {
 		}
 
 		function criarDeleteComAjax() {
-			if (confirm('Deseja realmente excluir os dados?')) {<!--'', aspas simples JS-->
+			if (confirm('Deseja realmente excluir os dados?')) {
 				var urlAction = document.getElementById('formUser').action;
 				var idUser = document.getElementById('id').value;
 
 				$.ajax({
-					method : "get",<!--Normalmente método get para (deletar) do banco de dados]-->
+					method : "get",
 					url : urlAction,
-					data : "id=" + idUser + "&acao=deletarajax",<!--Data=dados(parametros)-->
-					success : function(response) {<!--Se deu certo-->
+					data : "id=" + idUser + "&acao=deletarajax",
+					success : function(response) {
 						limparForm();
-						document.getElementById('msg').textContent = response;<!--Escrevendo com javascript ao invéz do ${msg} (jsp)--->
+						document.getElementById('msg').textContent = response;
 					}
-				}).fail(<!--Se deu errado-->
+				}).fail(
 						function(xhr, status, errorThrown) {
 							alert('Erro ao deletar usuário por id: '+ xhr.responseText);
-						});
+				});
 			}
 		}
 
