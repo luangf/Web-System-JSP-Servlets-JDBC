@@ -5,7 +5,7 @@
 		<div class="row align-items-center">
 			<div class="col-md-8">
 				<div class="page-header-title">
-					<h5 class="m-b-10">Sistema Web Cadastro de Usuários</h5>
+					<h5 class="m-b-10">Sistema Web de Cadastro de Usuários</h5>
 					<p class="m-b-0">Bem Vindo!</p>
 				</div>
 			</div>

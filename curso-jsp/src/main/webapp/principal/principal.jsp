@@ -33,7 +33,10 @@
 									<!-- Page-body start -->
 									<div class="page-body">
 										<div class="row">
-											<h1>Conteúdo das Páginas do Sistema</h1>
+												<h1 style="color:#4DC423;">Fluxos funcionalidades do sistema:</h1>
+												<h3><span style="color:#4DC423;">Cadastro -> Usuário:</span> Cadastra novos Usuários no sistema. Vê os usuários existentes. Pesquisa por usuários. Exclui usuários do sistema.</h3>
+												<h3><span style="color:#4DC423;">Relatório -> Usuário:</span> Exibe o id, o nome e os telefones dos usuários cadastrados no banco de dados. Pode filtrar por data dos usuários cadastrados. Pode imprimir PDF.</h3>
+												<h3><span style="color:#4DC423;">Relatório -> Gráfico Salário:</span> Gráfico de média salarial por tipo de usuário do sistema, por exemplo, a média salarial entre admin, auxiliar e secretaria. Pode Filtrar por data dos usuários cadastrados.</h3>
 										</div>
 									</div>
 									<!-- Page-body end -->
