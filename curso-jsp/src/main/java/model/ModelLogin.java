@@ -120,14 +120,6 @@ public class ModelLogin implements Serializable {
 		this.fotoUser = fotoUser;
 	}
 
-	public String getextensaofotouser() {
-		return extensaofotouser;
-	}
-
-	public void setextensaofotouser(String extensaofotouser) {
-		this.extensaofotouser = extensaofotouser;
-	}
-
 	public String getSexo() {
 		return sexo;
 	}

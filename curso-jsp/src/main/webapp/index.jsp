@@ -28,7 +28,7 @@ form {
 
 h5 {
 	position: absolute;
-	top: 30%;
+	top: 25%;
 	left: 33%;
 }
 
@@ -45,8 +45,9 @@ h5 {
 </head>
 <body style="background-color:#62acbd;">
 	<div>
-		<h5>Sistema Web</h5>
-
+		<h5>Sistema Web: JSP + Servlet + JDBC</h5>
+		<h5 style="top: 30%;">Login: admin</h5>
+		<h5 style="top: 33%;">Senha: admin</h5>
 		<form action="<%=request.getContextPath()%>/ServletLogin"
 			method="post" class="row g-3 needs-validation" novalidate>
 			<input type="hidden" value="<%=request.getParameter("url")%>"

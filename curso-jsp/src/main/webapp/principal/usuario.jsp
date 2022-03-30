@@ -489,9 +489,8 @@
 						limparForm();
 						document.getElementById('msg').textContent = response;
 					}
-				}).fail(
-						function(xhr, status, errorThrown) {
-							alert('Erro ao deletar usuário por id: '+ xhr.responseText);
+				}).fail(function(xhr, status, errorThrown) {
+					alert('Erro ao deletar usuário por id: '+ xhr.responseText);
 				});
 			}
 		}

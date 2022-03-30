@@ -105,7 +105,7 @@ public class DAOUsuarioRepository {
 				preparedSql = connection.prepareStatement(sql);
 
 				preparedSql.setString(1, objeto.getFotoUser());
-				preparedSql.setString(2, objeto.getextensaofotouser());
+				preparedSql.setString(2, objeto.getExtensaofotouser());
 				preparedSql.setString(3, objeto.getLogin());
 
 				preparedSql.execute();
@@ -143,7 +143,7 @@ public class DAOUsuarioRepository {
 				preparedSql = connection.prepareStatement(sql);
 
 				preparedSql.setString(1, objeto.getFotoUser());
-				preparedSql.setString(2, objeto.getextensaofotouser());
+				preparedSql.setString(2, objeto.getExtensaofotouser());
 				preparedSql.setLong(3, objeto.getId());
 
 				preparedSql.execute();
@@ -436,7 +436,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setSexo(resultado.getString("sexo"));
 
 			modelLogin.setFotoUser(resultado.getString("fotouser"));
-			modelLogin.setextensaofotouser(resultado.getString("extensaofotouser"));
+			modelLogin.setExtensaofotouser(resultado.getString("extensaofotouser"));
 
 			modelLogin.setCep(resultado.getString("cep"));
 			modelLogin.setLogradouro(resultado.getString("logradouro"));
@@ -471,7 +471,7 @@ public class DAOUsuarioRepository {
 			modelLogin.setSexo(resultado.getString("sexo"));
 
 			modelLogin.setFotoUser(resultado.getString("fotouser"));
-			modelLogin.setextensaofotouser(resultado.getString("extensaofotouser"));
+			modelLogin.setExtensaofotouser(resultado.getString("extensaofotouser"));
 
 			modelLogin.setCep(resultado.getString("cep"));
 			modelLogin.setLogradouro(resultado.getString("logradouro"));

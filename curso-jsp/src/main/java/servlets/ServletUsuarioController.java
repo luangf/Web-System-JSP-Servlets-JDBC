@@ -63,7 +63,6 @@ public class ServletUsuarioController extends ServletGenericUtil {
 			}else if (acao != null && !acao.isEmpty() && acao.equalsIgnoreCase("buscarUserAjax")) {//?acao=buscarUserAjax
 				String nomeBusca = request.getParameter("nomeBusca");
 				List<ModelLogin> dadosJsonUser=daoUsuarioRepository.consultaUsuarioList(nomeBusca, super.getUserLogado(request));
-				
 				ObjectMapper mapper=new ObjectMapper();
 				String json=mapper.writeValueAsString(dadosJsonUser);
 				
@@ -94,7 +93,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 				String idUser=request.getParameter("id");
 				ModelLogin modelLogin=daoUsuarioRepository.consultaUsuarioId(idUser, super.getUserLogado(request));
 				if(modelLogin.getFotoUser() != null && !modelLogin.getFotoUser().isEmpty()) {
-					response.setHeader("Content-Disposition", "attachment;filename=arquivo."+modelLogin.getextensaofotouser());
+					response.setHeader("Content-Disposition", "attachment;filename=arquivo."+modelLogin.getExtensaofotouser());
 					response.getOutputStream().write(new Base64().decodeBase64(modelLogin.getFotoUser().split("\\,")[1]));
 				}
 				
@@ -217,7 +216,7 @@ public class ServletUsuarioController extends ServletGenericUtil {
 					String imagemBase64="data:image/"+part.getContentType().split("\\/")[1]+";base64,"+new Base64().encodeBase64String(foto); //String gigante)
 					
 					modelLogin.setFotoUser(imagemBase64);
-					modelLogin.setextensaofotouser(part.getContentType().split("\\/")[1]);//
+					modelLogin.setExtensaofotouser(part.getContentType().split("\\/")[1]);//
 				}
 			}
 			
