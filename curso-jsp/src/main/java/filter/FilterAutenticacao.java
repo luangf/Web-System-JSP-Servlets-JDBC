@@ -1,19 +1,26 @@
 package filter;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
+
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+import javax.servlet.annotation.WebFilter;
+import javax.servlet.http.HttpFilter;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import connection.SingleConnectionBanco;
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.FilterConfig;
-import jakarta.servlet.RequestDispatcher;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.ServletRequest;
-import jakarta.servlet.ServletResponse;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.http.HttpFilter;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
+import dao.DAOVersionadorBanco;
+
 
 @WebFilter(urlPatterns = { "/principal/*" }) // intercepta todas as requisições do projeto ou mapeamento
 public class FilterAutenticacao extends HttpFilter {
@@ -68,9 +75,42 @@ public class FilterAutenticacao extends HttpFilter {
 			}
 		}
 	}
-
+	
 	public void init(FilterConfig fConfig) throws ServletException {
 		connection = SingleConnectionBanco.getConnection();
+		/*
+		DAOVersionadorBanco daoVersionadorBanco=new DAOVersionadorBanco();
+		
+		String caminhoPastaSQL=fConfig.getServletContext().getRealPath("versionadorbancosql")+File.separator;
+		
+		File[] filesSql=new File(caminhoPastaSQL).listFiles();
+		try {
+			for (File file : filesSql) {
+				boolean arquivoJaRodado=daoVersionadorBanco.arquivoSqlRodado(file.getName());
+				if(!arquivoJaRodado) {
+					FileInputStream entradaArquivo=new FileInputStream(file);
+					Scanner lerArquivo=new Scanner(entradaArquivo,"UTF-8");
+					StringBuilder sql=new StringBuilder();
+					while(lerArquivo.hasNext()) {
+						sql.append(lerArquivo.nextLine());
+						sql.append("\n");
+					}
+					connection.prepareStatement(sql.toString()).execute();
+					daoVersionadorBanco.gravaArquivoSqlRodado(file.getName());
+					
+					connection.commit();
+					lerArquivo.close();
+				}
+			}
+		}catch (Exception e) {
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+		*/
 	}
 
 }
