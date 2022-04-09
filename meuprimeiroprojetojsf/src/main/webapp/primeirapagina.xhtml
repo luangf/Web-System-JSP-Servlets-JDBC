@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+		<title>Curso Jsf</title>
+	</h:head>
+
+	<h:body>
+		<h1>Aprendendo JSF</h1>
+		<h:form id="formPessoa">
+			Nome:
+			<h:inputText id="campoNome" value="#{pessoaBean.nome}"/>
+			<br/><br/>
+			Senha:			
+			<h:inputSecret id="senha" value="#{pessoaBean.senha}"/>
+			<br/><br/>
+			Texto:
+			<h:inputTextarea id="texto" value="#{pessoaBean.texto}" rows="20" cols="40"/>
+			<br/><br/>
+			<h:commandButton binding="#{pessoaBean.commandButton}" value="Adicionar Nome" action="#{pessoaBean.addNome}"/>
+			<h:dataTable value="#{pessoaBean.nomes}" var="nome">
+				<h:column>
+					<h:outputText value="#{nome}"/>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton value="Voltar" action="index?faces-redirect=true"/>
+		</h:form>
+	</h:body>
+
+</html>
