@@ -5,7 +5,7 @@ Tecnologias:
 
 Servlets (back-end)
 
-JSP (front-end)
+JSP (front-end) + JSTL
 
 JDBC (conexão banco de dados)
 
