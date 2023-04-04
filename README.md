@@ -7,7 +7,7 @@ Tecnologias:
 * JSP + JSTL (front-end)
 * JDBC (conexão banco de dados
 * DashBoard em bootstrap, template free
-* API WebService ViaCEP <a target="_blank">https://viacep.com.br/</a>
+* API WebService ViaCEP [go](https://viacep.com.br/){:target="_blank"}
 * JasperReport para Relatórios
 * ChartJS para Gráficos
 * Tomcat
