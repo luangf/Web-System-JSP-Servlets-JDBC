@@ -13,3 +13,7 @@ Tecnologias:
 * Tomcat
 * Maven
 * PostgreSQL(banco de dados)
+
+Funcionalidades:
+
+* Filtro de Segurança(todas requisições passam por ele): classe Filter, para apenas usuários com o login e senha corretos poderem acessar o sistema.
