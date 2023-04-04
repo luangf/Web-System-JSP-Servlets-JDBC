@@ -5,9 +5,9 @@ Tecnologias:
 
 * Servlets (back-end)
 <br>
-JSP + JSTL (front-end)
+* JSP + JSTL (front-end)
 <br>
-JDBC (conexão banco de dados)
+* JDBC (conexão banco de dados)
 <br>
 API WebService ViaCEP
 <br>
