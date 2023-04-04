@@ -5,8 +5,9 @@ Tecnologias:
 
 * Servlets (back-end)
 * JSP + JSTL (front-end)
-* JDBC (conexão banco de dados)
-* API WebService ViaCEP
+* JDBC (conexão banco de dados
+* DashBoard em bootstrap, template free
+* API WebService ViaCEP <a target="_blank">https://viacep.com.br/</a>
 * JasperReport para Relatórios
 * ChartJS para Gráficos
 * Tomcat
