@@ -3,7 +3,7 @@ Sistema web feito em Servlets (back-end) + JSP (front-end) + JDBC (banco de dado
 
 Tecnologias:
 
-Servlets (back-end)
+* Servlets (back-end)
 <br>
 JSP + JSTL (front-end)
 <br>
