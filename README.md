@@ -9,7 +9,7 @@ JSP (front-end)
 
 JDBC (conexão banco de dados)
 
-API WebService ViaCEP (https://viacep.com.br/)
+API WebService ViaCEP
 
 JasperReport para Relatórios
 
