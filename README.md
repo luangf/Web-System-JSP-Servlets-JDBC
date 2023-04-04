@@ -16,4 +16,4 @@ Tecnologias:
 
 Funcionalidades:
 
-* Filtro de Segurança(todas requisições passam por ele): classe java que extends HttpFilter e implements Filter, para apenas usuários com o login e senha corretos poderem acessar o sistema.
+* Filtro de Segurança(todas requisições passam por ele): classe java que extends HttpFilter e implements Filter, para apenas usuários com o login e senha corretos poderem acessar o sistema. Ou seja, autenticação para usuários do sistema.
