@@ -4,11 +4,9 @@ Sistema web feito em Servlets (back-end) + JSP (front-end) + JDBC (banco de dado
 Tecnologias:
 
 * Servlets (back-end)
-<br>
 * JSP + JSTL (front-end)
-<br>
 * JDBC (conexão banco de dados)
-<br>
+
 API WebService ViaCEP
 <br>
 JasperReport para Relatórios
