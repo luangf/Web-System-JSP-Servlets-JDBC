@@ -14,7 +14,7 @@ Tecnologias:
 * ChartJS para Gráficos
 * Tomcat
 * Maven
-* PostgreSQL(banco de dados)
+* PostgreSQL (banco de dados)
 * Eclipse IDE
 
 Funcionalidades:
