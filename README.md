@@ -5,7 +5,7 @@ Tecnologias:
 
 * Servlets (back-end)
 * JSP + JSTL (front-end)
-* JDBC (conexão banco de dados
+* JDBC (conexão banco de dados)
 * Arquitetura MVC
 * Bootstrap
 * DashBoard em bootstrap, template free, responsivo
