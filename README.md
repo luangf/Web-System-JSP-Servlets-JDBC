@@ -15,6 +15,7 @@ Tecnologias:
 * Tomcat
 * Maven
 * PostgreSQL(banco de dados)
+* Eclipse IDE
 
 Funcionalidades:
 
