@@ -8,7 +8,7 @@ Tecnologias:
 * JDBC (conexão banco de dados
 * Arquitetura MVC
 * Bootstrap
-* DashBoard em bootstrap, template free
+* DashBoard em bootstrap, template free, responsivo
 * API WebService ViaCEP
 * JasperReport para Relatórios
 * ChartJS para Gráficos
