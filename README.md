@@ -20,7 +20,6 @@ Tecnologias:
 Funcionalidades:
 
 * Filtro de Segurança: apenas usuários com o login e senha corretos poderem acessar o sistema. Ou seja, autenticação para usuários do sistema.
-* Cadastro
- * teste
+* Cadastro de Usuário / pesquisar usuário por nome através de tela Modal Bootstrap
 * Relatório
 * Gráfico
