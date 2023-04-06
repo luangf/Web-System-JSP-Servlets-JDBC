@@ -22,7 +22,10 @@ Tecnologias:
 Funcionalidades:
 
 * Filtro de Segurança: apenas usuários com o login e senha corretos poderem acessar o sistema. Ou seja, autenticação para usuários do sistema.
-* Perfil de usuário, apenas determinados perfis podem acessar determinadas áreas do sistema. Ex.: perfil: admin, gerente, auxiliar...
+* 
+* Perfil de usuário: 
+  - Apenas determinados perfis podem acessar determinadas áreas do sistema. Ex.: perfil: admin, gerente, auxiliar...
+  - Cada usuário possue seus próprios usuários cadastrados, ou seja, cada user possue seus dados cadastrados próprios.
 * Cadastro de Usuário / pesquisar usuário por nome através de tela Modal Bootstrap
 * Relatório
 * Gráfico
