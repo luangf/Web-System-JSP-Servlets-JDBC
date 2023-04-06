@@ -28,6 +28,3 @@ Funcionalidades:
 * Cadastro de Usuário / pesquisar usuário por nome através de tela Modal Bootstrap
 * Relatório
 * Gráfico
-
-Extra:
-* Modal Bootstrap
