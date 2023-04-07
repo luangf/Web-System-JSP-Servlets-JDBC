@@ -29,5 +29,6 @@ Funcionalidades:
 * Cadastro de Usuário / pesquisar usuário por nome através de tela Modal Bootstrap
   - Cadastro de Foto / Baixar Foto
   - Paginação
+* Cadastro de Telefones dos Usuários
 * Relatório
 * Gráfico
