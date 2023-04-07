@@ -28,5 +28,6 @@ Funcionalidades:
   - Apenas determinados perfis podem acessar determinadas áreas do sistema. Exemplo de perfil: admin, gerente, auxiliar...
 * Cadastro de Usuário / pesquisar usuário por nome através de tela Modal Bootstrap
   - Cadastro de Foto / Baixar Foto
+  - Paginação
 * Relatório
 * Gráfico
