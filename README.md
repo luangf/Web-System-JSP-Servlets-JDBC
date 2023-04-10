@@ -10,7 +10,7 @@ Tecnologias:
 * Bootstrap
 * DashBoard em bootstrap, template free, responsivo
 * API WebService ViaCEP
-* JasperReport para Relatórios
+* JasperReport para Relatórios e SubRelatórios
 * ChartJS para Gráficos
 * Tomcat
 * Maven
