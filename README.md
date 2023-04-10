@@ -18,6 +18,7 @@ Tecnologias:
 * Eclipse IDE
 * JQuery
 * AJAX
+* Versionador de Banco de Dados
 
 Funcionalidades:
 
