@@ -22,6 +22,8 @@ Tecnologias:
 
 Funcionalidades:
 
+https://user-images.githubusercontent.com/82978424/231294048-9fb073d0-c624-4402-a84e-06acc968f1bb.mp4
+
 * Filtro de Segurança: apenas usuários com o login e senha corretos poderem acessar o sistema. Ou seja, autenticação para usuários do sistema.
 * Perfil de usuário:
   - Admin padrão para o sistema(admin master)
