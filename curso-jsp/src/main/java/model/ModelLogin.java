@@ -1,67 +1,61 @@
 package model;
 
 import java.io.Serializable;
-//Classe Model(classe de modelo)
-
-//model implementa o serializable (padrao)
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+
 public class ModelLogin implements Serializable {
 
-	//model tem essa variavel (padrao)
 	private static final long serialVersionUID = 1L;
 
-	private Long id;//padrao para localizar a linha da tabela...varias funcionalidades a variavel id..
+	private Long id;
 	private String nome;
 	private String email;
 	private String login;
 	private String senha;
-	private Date dataNascimento;
 	private boolean useradmin;
 	private String perfil;
 	private String sexo;
-	private String fotoUser;
-	private String extensaofotouser;
+
+	private String fotouser; // do tipo text no banco de dados, gigante
+	private String extensaofotouser;// png, jpg...
+
 	private String cep;
-	private String logradouro;
+	private String logradouro; // rua
+	private String complemento; // número
 	private String bairro;
-	private String localidade;
-	private String uf; //estado
-	private String numero;
+	private String localidade; // cidade
+	private String uf; // estado
+
+	private Date dataNascimento;
+
 	private Double rendaMensal;
-	private List<ModelTelefone> telefones=new ArrayList<ModelTelefone>();
-	
+
+	private List<ModelTelefone> telefones = new ArrayList<ModelTelefone>();
+
 	public void setTelefones(List<ModelTelefone> telefones) {
 		this.telefones = telefones;
 	}
-	
+
 	public List<ModelTelefone> getTelefones() {
 		return telefones;
 	}
-	
+
 	public void setRendaMensal(Double rendaMensal) {
 		this.rendaMensal = rendaMensal;
 	}
-	
+
 	public Double getRendaMensal() {
 		return rendaMensal;
 	}
-	
+
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	public Date getDataNascimento() {
 		return dataNascimento;
-	}
-	
-	public String getExtensaofotouser() {
-		return extensaofotouser;
-	}
-
-	public void setExtensaofotouser(String extensaofotouser) {
-		this.extensaofotouser = extensaofotouser;
 	}
 
 	public String getCep() {
@@ -78,6 +72,14 @@ public class ModelLogin implements Serializable {
 
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
+	}
+
+	public String getComplemento() {
+		return complemento;
+	}
+
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
 	public String getBairro() {
@@ -104,55 +106,55 @@ public class ModelLogin implements Serializable {
 		this.uf = uf;
 	}
 
-	public String getNumero() {
-		return numero;
+	public boolean isNovo() {
+		if (this.id == null) {
+			return true; // gravar/inserir
+		} else if (this.id != null && this.id > 0) {
+			return false; // atualizar
+		}
+		return id == null;
 	}
 
-	public void setNumero(String numero) {
-		this.numero = numero;
+	public String getFotouser() {
+		return fotouser;
 	}
 
-	public String getFotoUser() {
-		return fotoUser;
+	public void setFotouser(String fotouser) {
+		this.fotouser = fotouser;
 	}
 
-	public void setFotoUser(String fotoUser) {
-		this.fotoUser = fotoUser;
+	public String getExtensaofotouser() {
+		return extensaofotouser;
+	}
+
+	public void setExtensaofotouser(String extensaofotouser) {
+		this.extensaofotouser = extensaofotouser;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
 	}
 
 	public String getSexo() {
 		return sexo;
 	}
-	
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-	
+
 	public void setPerfil(String perfil) {
 		this.perfil = perfil;
 	}
-	
+
 	public String getPerfil() {
 		return perfil;
 	}
-	
+
 	public void setUseradmin(boolean useradmin) {
 		this.useradmin = useradmin;
 	}
-	
+
 	public boolean getUseradmin() {
 		return useradmin;
 	}
-	
-	public boolean isNovo() {
-		if(this.id == null) {
-			return true; //inserir novo
-		}else if(this.id != null && this.id > 0) {
-			return false; //atualizar
-		}
-		return id == null;
-	}
-	
+
 	public Long getId() {
 		return id;
 	}

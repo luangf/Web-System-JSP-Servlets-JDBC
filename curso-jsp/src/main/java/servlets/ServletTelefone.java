@@ -1,110 +1,105 @@
 package servlets;
 
 import java.io.IOException;
-
-
-
+import java.util.ArrayList;
 import java.util.List;
 
-import dao.DAOTelefoneRepository;
-import dao.DAOUsuarioRepository;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import dao.DAOTelefoneRepository;
+import dao.DAOUsuarioRepository;
 import model.ModelLogin;
 import model.ModelTelefone;
 
-//salvar e excluir no telefone
 @WebServlet("/ServletTelefone")
 public class ServletTelefone extends ServletGenericUtil {
 
 	private static final long serialVersionUID = 1L;
+	
 	private DAOUsuarioRepository daoUsuarioRepository = new DAOUsuarioRepository();
 	
-	//foi criado um objeto da classe DAOTelefoneRepository
 	private DAOTelefoneRepository daoTelefoneRepository=new DAOTelefoneRepository();
-	
-	public ServletTelefone() {
-		super();
-	}
 
-	// consultar/deletar
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try { //try doGet
-			String acao=request.getParameter("acao");//Front->Back (os dados que recebe da pagina jsp)
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		try {
+			String acao=request.getParameter("acao");
 			
 			if(acao != null && !acao.isEmpty() && acao.equals("excluir")) {
-				String idFone=request.getParameter("id");//pega dado da tela pra servlet "tratar"
+				String idFone=request.getParameter("id");
+
+				daoTelefoneRepository.deletarTelefone(Long.parseLong(idFone));
 				
-				//metodo de acesso/interação com banco de dados(deletarFone), no caso metodo "DAORepository" de deletar no banco de dados
-				daoTelefoneRepository.deletarTelefone(Long.parseLong(idFone)); //converte o atributo "idFone" para Long com o "Long.parseLong()", pq o metodo deletarTelefone requisita um parametro long, pq o id no banco de dados (relação) com o eclipse é Long
+				String userPai=request.getParameter("userpai");
 				
-				String userPai=request.getParameter("userpai");//front->back pega o parametro com nome "userpai"
-				
-				ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(Long.parseLong(userPai));
+				ModelLogin modelLogin=daoUsuarioRepository.consultarUsuarioId(Long.parseLong(userPai));
 				
 				List<ModelTelefone> modelTelefones=daoTelefoneRepository.listFone(modelLogin.getId());
-				request.setAttribute("modelTelefones", modelTelefones); //back->end
+				request.setAttribute("modelTelefones", modelTelefones);
 				
-				request.setAttribute("modelLogin", modelLogin); //dado do back-end que pode ser acessado no front(pagina jsp), seta o atributo que pode ser acessado com ${nomeAtributo} ou request.getAttribute("nomeAtributo")
-				request.getRequestDispatcher("principal/telefone.jsp").forward(request, response); //redireciona para determinada tela(combo das 2 funções)
+				request.setAttribute("msg", "Telefone excluido com sucesso");
+				request.setAttribute("modelLogin", modelLogin);
+				request.getRequestDispatcher("principal/telefone.jsp").forward(request, response);
 				
-				return; //pra n bagunçar a tela...
+				return;
 			}
 			
-			String idUser = request.getParameter("idUser");//parametro(dado) que vem da tela(pagina jsp)
-			if (idUser != null && !idUser.isEmpty()) {
-
-				ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(Long.parseLong(idUser));
-				
+			String idUser=request.getParameter("iduser"); // id usuário cad (especifico, ñ o logado)
+			
+			if(idUser != null && !idUser.isEmpty()) { //se tiver usuario no formulario
+				ModelLogin modelLogin=daoUsuarioRepository.consultarUsuarioId(Long.parseLong(idUser));
+					
 				List<ModelTelefone> modelTelefones=daoTelefoneRepository.listFone(modelLogin.getId());
 				request.setAttribute("modelTelefones", modelTelefones);
 				
 				request.setAttribute("modelLogin", modelLogin);
 				request.getRequestDispatcher("principal/telefone.jsp").forward(request, response);
-
-			} else {
-				List<ModelLogin> modelLogins = daoUsuarioRepository.consultaUsuarioList(super.getUserLogado(request));
+			}else { //se n tiver user volta pra pagina de user
+				List<ModelLogin> modelLogins=daoUsuarioRepository.consultarUsuarioList(super.getUserLogado(request));
+				
 				request.setAttribute("modelLogins", modelLogins);
-				request.setAttribute("totalPaginas", daoUsuarioRepository.totalPaginas(this.getUserLogado(request)));
+				request.setAttribute("totalPaginas", daoUsuarioRepository.totalPaginas(super.getUserLogado(request)));
 				request.getRequestDispatcher("principal/usuario.jsp").forward(request, response);
+				
+				request.getRequestDispatcher("principal/principal.jsp").forward(request, response);
 			}
-		} catch (Exception e) { //catch doGet
-			e.printStackTrace(); //imprime no console do Eclipse o erro
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
-	// gravar/atualizar
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		try { //try doPost
-			String usuario_pai_id = request.getParameter("id"); // usuario que ta sendo analisado no momento
-			String numero = request.getParameter("numero"); //vem do form do front
-
-			if(!daoTelefoneRepository.existeFone(numero, Long.valueOf(usuario_pai_id))) { //se nao existe entra no if
-				ModelTelefone modelTelefone = new ModelTelefone(); // objeto dos dados recebidos do front
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		try {
+			String usuario_pai_id=request.getParameter("id");
+			String numero=request.getParameter("numero");
+			
+			if(!daoTelefoneRepository.existeFone(numero, Long.valueOf(usuario_pai_id))) {
+				ModelTelefone modelTelefone=new ModelTelefone();
 				
 				modelTelefone.setNumero(numero);
-				modelTelefone.setUsuario_pai_id(daoUsuarioRepository.consultaUsuarioId(Long.parseLong(usuario_pai_id)));//CRUD(R)-read/consultar;sem commit 
-				modelTelefone.setUsuario_cad_id(super.getUserLogadoObj(request)); // usuario logado
+				modelTelefone.setUsuario_pai_id(daoUsuarioRepository.consultarUsuarioId(Long.parseLong(usuario_pai_id)));
+				modelTelefone.setUsuario_cad_id(super.getUserLogadoObj(request));
 				
 				daoTelefoneRepository.gravarTelefone(modelTelefone);
 				
-				request.setAttribute("msg", "Salvo com sucesso!");
+				request.setAttribute("msg", "Telefone salvo com sucesso!");
 				
-			}else { //se já existe
-				request.setAttribute("msg", "Telefone já existe!");
+			}else {
+				request.setAttribute("msg", "Telefone já existe");
 			}
+			
 			List<ModelTelefone> modelTelefones=daoTelefoneRepository.listFone(Long.parseLong(usuario_pai_id));
 			
-			ModelLogin modelLogin = daoUsuarioRepository.consultaUsuarioId(Long.parseLong(usuario_pai_id));//pega a classe modelo da tela passada
+			ModelLogin modelLogin=daoUsuarioRepository.consultarUsuarioId(Long.parseLong(usuario_pai_id));
+			
 			request.setAttribute("modelLogin", modelLogin);
 			request.setAttribute("modelTelefones", modelTelefones);
 			request.getRequestDispatcher("principal/telefone.jsp").forward(request, response);
-		} catch (Exception e) { //catch doPost
-			e.printStackTrace(); //imprime no console do Eclipse o erro
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 }

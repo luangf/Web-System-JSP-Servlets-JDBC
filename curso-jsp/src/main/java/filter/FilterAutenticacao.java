@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.RequestDispatcher;
@@ -21,17 +22,16 @@ import javax.servlet.http.HttpSession;
 import connection.SingleConnectionBanco;
 import dao.DAOVersionadorBanco;
 
-
-@WebFilter(urlPatterns = { "/principal/*" }) // intercepta todas as requisições do projeto ou mapeamento
-public class FilterAutenticacao extends HttpFilter {
-
+@WebFilter(urlPatterns = {"/principal/*"})
+public class FilterAutenticacao extends HttpFilter implements Filter {
+       
 	private static final long serialVersionUID = 1L;
-	
-	private static Connection connection;
 
-	public FilterAutenticacao() {
-		super();
-	}
+	private static Connection connection;
+	
+	public FilterAutenticacao() { 
+        super();
+    }
 
 	public void destroy() {
 		try {
@@ -41,33 +41,35 @@ public class FilterAutenticacao extends HttpFilter {
 		}
 	}
 
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
-			throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		try {
-			//Pegando usuario logado
-			HttpServletRequest req = (HttpServletRequest) request;//ServletRequest -> HttpServletRequest
-			HttpSession session = req.getSession();
-			String usuarioLogado = (String) session.getAttribute("usuario");
+			HttpServletRequest req=(HttpServletRequest) request;
+			HttpSession session=req.getSession();
 			
-			String urlParaAutenticar = req.getServletPath();// url que esta sendo acessada
+			String usuarioLogado=(String) session.getAttribute("usuario"); //login user
 			
-			//validar se esta logado senao redireciona para a tela de login
-			//sendo que não está logado(a lógica desse if a pessoa tentando acessar uma url diferente não pode...), tentando acessar qualquer parte do sistema sem estar logado, não pode...
-			if (usuarioLogado == null && !urlParaAutenticar.equalsIgnoreCase("/principal/ServletLogin")) { // nao logado
-				RequestDispatcher redireciona = request.getRequestDispatcher("/index.jsp?url="+urlParaAutenticar);//seta o parametro url com o valor da url que o usuario queria acessar
-				request.setAttribute("msg", "Por favor realize o login!");
+			String urlParaAutenticar=req.getServletPath(); //url q esta sendo acessada
+			
+			//validar se ta logado, senao redireciona para login
+			if(usuarioLogado == null  && !urlParaAutenticar.equalsIgnoreCase("/principal/ServletLoginController")) {
+				
+				RequestDispatcher redireciona=request.getRequestDispatcher("/index.jsp?url="+urlParaAutenticar);
+				request.setAttribute("msg", "por favor realize o login");
 				redireciona.forward(request, response);
-				return; // para a execução e redireciona para o login;quebrando o do filter que só acabava com o chain creio
-			} else {// logado
+				return;
+				
+			}else {
 				chain.doFilter(request, response);
 			}
+			
 			connection.commit();
-		} catch (Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 			
-			RequestDispatcher redirecionar = request.getRequestDispatcher("erro.jsp");
+			RequestDispatcher redireciona=request.getRequestDispatcher("erro.jsp");
 			request.setAttribute("msg", e.getMessage());
-			redirecionar.forward(request, response);
+			redireciona.forward(request, response);
 			try {
 				connection.rollback();
 			} catch (SQLException e1) {
@@ -75,28 +77,30 @@ public class FilterAutenticacao extends HttpFilter {
 			}
 		}
 	}
-	
+
 	public void init(FilterConfig fConfig) throws ServletException {
-		connection = SingleConnectionBanco.getConnection();
-		/*
-		DAOVersionadorBanco daoVersionadorBanco=new DAOVersionadorBanco();
+		connection=SingleConnectionBanco.getConnection();
 		
+		DAOVersionadorBanco daoVersionadorBanco=new DAOVersionadorBanco();
+		//File.separator independente se é Linux ou Windows
 		String caminhoPastaSQL=fConfig.getServletContext().getRealPath("versionadorbancosql")+File.separator;
 		
-		File[] filesSql=new File(caminhoPastaSQL).listFiles();
+		File[] filesSQL=new File(caminhoPastaSQL).listFiles();
 		try {
-			for (File file : filesSql) {
+			for (File file : filesSQL) {
 				boolean arquivoJaRodado=daoVersionadorBanco.arquivoSqlRodado(file.getName());
 				if(!arquivoJaRodado) {
 					FileInputStream entradaArquivo=new FileInputStream(file);
-					Scanner lerArquivo=new Scanner(entradaArquivo,"UTF-8");
+					Scanner lerArquivo=new Scanner(entradaArquivo, "UTF-8");
 					StringBuilder sql=new StringBuilder();
+					
 					while(lerArquivo.hasNext()) {
 						sql.append(lerArquivo.nextLine());
 						sql.append("\n");
 					}
+					
 					connection.prepareStatement(sql.toString()).execute();
-					daoVersionadorBanco.gravaArquivoSqlRodado(file.getName());
+					daoVersionadorBanco.gravaArquivoSQLRodado(file.getName());
 					
 					connection.commit();
 					lerArquivo.close();
@@ -110,7 +114,6 @@ public class FilterAutenticacao extends HttpFilter {
 			}
 			e.printStackTrace();
 		}
-		*/
 	}
 
 }
