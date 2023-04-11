@@ -23,6 +23,7 @@ Tecnologias:
 Funcionalidades:
 
 * Filtro de Segurança: apenas usuários com o login e senha corretos poderem acessar o sistema. Ou seja, autenticação para usuários do sistema.
+
 ![image](https://user-images.githubusercontent.com/82978424/231167351-8af403c5-23bf-440f-8f74-a2cc9c2b4628.png)
 
 * Perfil de usuário:
