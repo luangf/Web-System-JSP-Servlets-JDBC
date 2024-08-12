@@ -1,35 +1,35 @@
 # Sistema-Web-JSP-Servlets-JDBC
-Sistema web feito em Servlets (back-end) + JSP (front-end) + JDBC (banco de dados)
+Web system made with Servlets (back end) + JSP (front end) + JDBC (database)
 
 Tecnologias:
 
 * Servlets (back-end)
 * JSP + JSTL (front-end)
-* JDBC (conexão banco de dados)
-* Arquitetura MVC
+* JDBC (database connection)
+* MVC architecture
 * Bootstrap
-* DashBoard em bootstrap, template free, responsivo
-* API WebService ViaCEP
-* JasperReport para Relatórios e SubRelatórios
-* ChartJS para Gráficos
+* DashBoard in bootstrap, free template, responsive
+* API WebService ViaCEP (search address by zip code)
+* JasperReport for reports and subReports
+* ChartJS for charts
 * Tomcat
 * Maven
-* PostgreSQL (banco de dados)
+* PostgreSQL (database)
 * Eclipse IDE
 * JQuery
 * AJAX
-* Versionador de Banco de Dados
+* Database Versioner
 
-Funcionalidades:
+Features:
 
-* Filtro de Segurança: apenas usuários com o login e senha corretos poderem acessar o sistema. Ou seja, autenticação para usuários do sistema.
-* Perfil de usuário:
-  - Admin padrão para o sistema(admin master)
-  - Cada usuário possui seus próprios usuários cadastrados, ou seja, cada usuário possui seus dados próprios.
-  - Apenas determinados perfis podem acessar determinadas áreas do sistema. Exemplo de perfil: admin, gerente, auxiliar...
-* Cadastro de Usuário / pesquisar usuário por nome através de tela Modal Bootstrap
-  - Cadastro de Foto / Baixar Foto
-  - Paginação
-* Cadastro de Telefones dos Usuários
-* Relatório
-* Gráfico
+* Security Filter: only users with the correct login and password can access the system. In other words, authentication for system users.
+* User profile:
+  - Default admin for the system (admin master)
+  - Each user has their own registered users, in other words, each user has their own data.
+  - Only certain profiles can access certain areas of the system. Example profiles: admin, manager, assistant...
+* User registration / search for user by name using Bootstrap Modal screen
+  - Photo Registration / Download Photo
+  - Pagination
+* Registration of users' telephone numbers
+* Report
+* Chart
