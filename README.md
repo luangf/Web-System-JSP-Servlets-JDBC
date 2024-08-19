@@ -33,4 +33,4 @@ Features:
 * Registration of users' telephone numbers
 * Report
 * Chart
-* Calendar, Mask to only number in some inputs...
+* Calendar, Masks
