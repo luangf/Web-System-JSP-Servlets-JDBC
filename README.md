@@ -10,7 +10,7 @@ Tecnologias:
 * Bootstrap
 * DashBoard in bootstrap, free template, responsive
 * API WebService ViaCEP (search address by zip code)
-* JasperReport for reports and subReports
+* JasperReport for reports and subReports with Jaspersoft Studio
 * ChartJS for charts
 * Tomcat
 * Maven
