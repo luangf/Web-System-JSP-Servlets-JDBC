@@ -34,3 +34,20 @@ Features:
 * Report
 * Chart
 * Calendar, Masks
+
+Some Photos of the System:
+
+![1](https://github.com/user-attachments/assets/112f81d3-68d7-4395-bc0b-c4e8c3f4d53e)
+
+![2](https://github.com/user-attachments/assets/9aed0393-87fd-4693-9396-2d50cae49914)
+
+![3](https://github.com/user-attachments/assets/03861183-7c11-429d-a4f8-950175ab9ac0)
+
+![4](https://github.com/user-attachments/assets/368948fc-6054-4e9f-af2b-b57d9d3784eb)
+
+![5](https://github.com/user-attachments/assets/f3c7f992-33af-4aaf-9763-e8a2b2a82efa)
+
+
+
+
+
