@@ -59,6 +59,13 @@ Some Photos of the System:
 
 <img src="https://github.com/user-attachments/assets/ff9234e2-59fe-4766-a075-252e6be9a714" width="700px">
 
+---
+
+PDF
+
+![7](https://github.com/user-attachments/assets/9c8609b4-e673-4ace-8ad2-964b1cb36d5c)
+
+
 
 
 
