@@ -37,7 +37,7 @@ Features:
 
 Some Photos of the System:
 
-<img src="https://github.com/user-attachments/assets/112f81d3-68d7-4395-bc0b-c4e8c3f4d53e" width="300px">
+<img src="https://github.com/user-attachments/assets/112f81d3-68d7-4395-bc0b-c4e8c3f4d53e" width="500px">
 
 ![2](https://github.com/user-attachments/assets/9aed0393-87fd-4693-9396-2d50cae49914)
 
