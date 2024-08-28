@@ -43,11 +43,9 @@ Some Photos of the System:
 
 <img src="https://github.com/user-attachments/assets/03861183-7c11-429d-a4f8-950175ab9ac0" width="700px">
 
-![3](https://github.com/user-attachments/assets/03861183-7c11-429d-a4f8-950175ab9ac0)
+<img src="https://github.com/user-attachments/assets/368948fc-6054-4e9f-af2b-b57d9d3784eb" width="700px">
 
-![4](https://github.com/user-attachments/assets/368948fc-6054-4e9f-af2b-b57d9d3784eb)
-
-![5](https://github.com/user-attachments/assets/f3c7f992-33af-4aaf-9763-e8a2b2a82efa)
+<img src="https://github.com/user-attachments/assets/f3c7f992-33af-4aaf-9763-e8a2b2a82efa" width="700px">
 
 
 
