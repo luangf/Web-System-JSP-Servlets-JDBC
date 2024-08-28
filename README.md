@@ -61,7 +61,7 @@ Some Photos of the System:
 
 ---
 
-PDF
+PDF generated
 
 ![7](https://github.com/user-attachments/assets/9c8609b4-e673-4ace-8ad2-964b1cb36d5c)
 
