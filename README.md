@@ -55,6 +55,9 @@ Some Photos of the System:
 
 <img src="https://github.com/user-attachments/assets/f3c7f992-33af-4aaf-9763-e8a2b2a82efa" width="700px">
 
+---
+
+<img src="https://github.com/user-attachments/assets/ff9234e2-59fe-4766-a075-252e6be9a714" width="700px">
 
 
 
